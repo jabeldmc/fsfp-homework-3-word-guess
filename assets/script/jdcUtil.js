@@ -16,22 +16,26 @@ Array.prototype.equals = function( other ) {
 }
 
 
-/*** FUNCTION console.logObject()
+/*** FUNCTION console.logValue()
 ***/
 
-if ( console.logObject ) {
-    console.warn( "Overriding existing implementation of `console.logObject()`." );
+if ( console.logValue ) {
+    console.warn( "Overriding existing implementation of `console.logValue()`." );
 }
-console.logObject = function( label , value ) {
-    var groupLabel = ( Object.prototype.toString.call( value ) + " " + label );
-    console.group( groupLabel );
-    if ( typeof value === "object" ) {
-        console.log( JSON.parse( JSON.stringify( value ) ) );
-    }
-    else {
-        console.log( value );
-    }
-    console.groupEnd();
+console.logValue = function( label , value ) {
+        if ( typeof value === "string" ) {
+            var valueString = ( "\"" + value + "\"" );
+        }
+        else {
+            var valueString = value;
+            // var valueString = console.log( JSON.parse( JSON.stringify( value ) ) );
+
+        }
+    console.log(
+        Object.prototype.toString.call( value ) ,
+        label ,
+        valueString
+    );
 }
 
 
